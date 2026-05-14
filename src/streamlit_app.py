@@ -1,10 +1,7 @@
-import streamlit_app as st
+import streamlit as st
 from main import RAGPipeline
 from llm import generate_answer
 
-
-rag = RAGPipeline()
-rag.load() 
 
 st.title("📄 RAG Q&A System")
 
@@ -12,7 +9,9 @@ st.title("📄 RAG Q&A System")
 query = st.text_input("Enter your question")
 
 if st.button("Submit"):
-
+    from main import RAGPipeline
+    rag = RAGPipeline()
+    rag.load() 
     if query.strip() == "":
         st.warning("Please enter a question")
     else:
