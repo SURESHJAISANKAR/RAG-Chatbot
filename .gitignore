@@ -11,8 +11,6 @@ venv/
 # Environment variables
 .env
 
-# Data files (optional)
-data/
 
 # Models
 local_model/
