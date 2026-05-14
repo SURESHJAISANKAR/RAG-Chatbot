@@ -1,0 +1,11 @@
+pandas
+numpy
+langchain
+langchain_community
+pymupdf
+sentence-transformers
+faiss-cpu
+groq
+streamlit
+python-dotenv
+fastembed
