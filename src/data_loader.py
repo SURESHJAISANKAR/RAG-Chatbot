@@ -11,7 +11,7 @@ def load_all_docs(data_dir: str) -> List[Any]:
         documents.extend(loader.load())
     return documents
 
-if __name__ == "__main__":
-    docs = load_all_docs("data")
-    print(f"Loaded {len(docs)} documents.")
-    print("Example document:", docs[0] if docs else None)
+# if __name__ == "__main__":
+#     docs = load_all_docs("data")
+#     print(f"Loaded {len(docs)} documents.")
+#     print("Example document:", docs[0] if docs else None)
