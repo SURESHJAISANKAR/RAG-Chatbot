@@ -2,24 +2,21 @@ from data_loader import load_all_docs
 from embedding import Embeddding_pipeline
 from vectore_store import FaissVectorStore
 
-
 class RAGPipeline:
-    def __init__(self, data_path="data"):
+    def __init__(self, data_path=f'D:\RAG-Chatbot\data'):
         self.data_path = data_path
+        print(f'[INFO] Data Path Initialised at {data_path} from Main.py')
         self.pipeline = Embeddding_pipeline()
         self.vector_store = FaissVectorStore()
 
     def build(self):
         docs = load_all_docs(self.data_path)
-
+        print(f'[INFO] Docs Ready for Chunking {len(docs)}')
         chunks = self.pipeline.chunk_documents(docs)
         embeddings, metadata = self.pipeline.embed_chunks(chunks)
-
         self.vector_store.add_embeddings(embeddings, metadata)
         self.vector_store.save()
-
-        print("[INFO] Vector store built successfully ✅")
-
+        print("[INFO] Vector store built successfully ✅ from Main.py")
 
     def load(self):
         self.vector_store.load()

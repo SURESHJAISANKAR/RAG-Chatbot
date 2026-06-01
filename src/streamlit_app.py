@@ -2,7 +2,6 @@ import streamlit as st
 from main import RAGPipeline
 from llm import generate_answer
 
-
 st.title("📄 RAG Q&A System")
 
 # Input box
@@ -16,12 +15,10 @@ if st.button("Submit"):
         st.warning("Please enter a question")
     else:
         context = rag.query(query)
-
         answer = generate_answer(query, context)
-
         st.subheader("Answer:")
         st.write(answer)
 
-
-        with st.expander("Retrieved Context"):
-            st.write(context)
+        # with st.expander("Retrieved Context"):
+        #     st.write(context)
+        # st.text_input = ''

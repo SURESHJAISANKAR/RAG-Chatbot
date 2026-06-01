@@ -9,26 +9,26 @@ class FaissVectorStore():
         
         self.persist_dir = persist_directory
         os.makedirs(self.persist_dir, exist_ok=True)
-
         self.index = None
         self.metadata: List[Dict] = []
-
-        print(f"[INFO] FAISS vector store initialized at {persist_directory}")
+        print(f"[INFO] FAISS vector store initialized at {persist_directory} from Vectorstore.py")
     
 
     def add_embeddings(self, embeddings: np.ndarray, metadata:List[Dict]):
         embeddings = embeddings.astype("float32")
+        print('EMBEDDINGS PRINTED BELOW')
+        print(embeddings)
         dim = embeddings.shape[1]
 
         if self.index == None:
             self.index = faiss.IndexFlatL2(dim)
-            print(f"[INFO] Created FAISS IndexFlatL2 with dimension {dim}")
+            print(f"[INFO] Created FAISS IndexFlatL2 with dimension {dim} from Vectorstore.py")
         
         self.index.add(embeddings)
 
         self.metadata.extend(metadata)
 
-        print(f"[INFO] Added {len(embeddings)} vectors to FAISS")
+        print(f"[INFO] Added {len(embeddings)} vectors to FAISS from Vectorstore.py")
     
 
     def save(self):
@@ -40,18 +40,18 @@ class FaissVectorStore():
         with open(meta_path, "wb") as f:
             pickle.dump(self.metadata, f)
 
-        print(f"[INFO] Saved FAISS index and metadata")
+        print(f"[INFO] Saved FAISS index and metadata from Vectorstore.py")
 
 
     def load(self):
         faiss_path = os.path.join(self.persist_dir, "index.faiss")
         meta_path = os.path.join(self.persist_dir, "metadata.pkl")
 
-        self.index =  faiss.write_index(faiss_path)
+        self.index =  faiss.read_index(faiss_path)
 
         with open(meta_path, "rb") as f:
             self.metadata = pickle.load(f)
-        print(f"[INFO] Loaded Faiss index and metadata from {self.persist_dir}")
+        print(f"[INFO] Loaded Faiss index and metadata from {self.persist_dir} from Vectorstore.py")
 
 
     def search(self, query_embedding: np.ndarray, top_k: int = 5):
