@@ -13,7 +13,4 @@ def load_all_docs(data_dir: str) -> List[Any]:
         documents.extend(loader.load())
     return documents
 
-
-# if __name__ == "__main__":
-#     load_all_docs(f'D:\RAG-Chatbot\data')
     
